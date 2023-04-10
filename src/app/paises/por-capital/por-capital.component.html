@@ -1,0 +1,53 @@
+
+<style>
+    ul {
+        list-style: none;
+    }
+</style>
+ 
+ <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <form (ngSubmit)="buscar()" class="d-flex">
+            <input 
+            type="text" 
+            name="termino"
+            autocomplete="off"
+            placeholder="Buscar Capital..." 
+            class="form-control me-2"
+            aria-label="Search"
+            (input)="sugerencias($event)"
+            [(ngModel)]="termino"
+            >
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+    </div>
+  </nav>
+
+
+ <ul>
+    <li *ngFor=" let paises of paisesSugeridos">
+        {{paises.capital}}
+    </li>
+ </ul>
+ 
+ <div *ngIf="hayError" 
+      class="alerta">
+ No se encontro el termino {{ termino }}
+ </div>
+
+
+ <table>
+    <tbody>
+        <tr *ngFor="let Capital of capitales; let i = index">
+           
+            <td>{{ i + 1 }}</td>
+            <td><img [src]="Capital.coatOfArms.png" style="width: 40px;" alt=""></td>
+            <td> {{Capital.flag}} </td>
+            <td> {{Capital.capital}}, {{Capital.name.common}} </td>
+            <td> {{Capital.population}} </td>
+           
+            <td> <a [routerLink]="[ '/paises', Capital.cca2 ]"> ver mas...</a></td>
+           
+        </tr>
+    </tbody>
+ </table>

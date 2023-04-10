@@ -1,0 +1,65 @@
+<style>
+    button {
+        margin-left: 5px;
+        color: black;
+        border-radius: 5px;
+        width: 85px;
+        height: 60px;
+        text-align: center;
+    }
+    .container{
+        display: flex;
+    }
+
+    .container h3{
+        margin: 10px 25px;
+    }
+
+    td {
+        padding-left: 25px;
+    }
+
+    table {
+        margin-top: 50px;
+    }
+
+    .botones {
+        display: flex;
+    }
+</style>
+
+
+<h2>Buscar por Region: <small> {{ regionactiva |titlecase }} </small></h2>
+<hr>
+
+<div class="container">
+    <h3> Selecionar la region:</h3>
+    <div class="botones">
+        <button *ngFor="let region of regiones"
+                 (click)="activarRegion( region)"
+                 class="btn btn-outline-success">
+            {{ region | titlecase}}
+        </button>
+    </div>
+</div>
+
+<table>
+    <tbody>
+        <tr>
+            <td> #ID </td>
+            <td> Bandera </td>
+            <td> Pais</td>
+            <td> Capital </td>
+            <td> Poblacion </td>
+        </tr>
+        
+        <tr *ngFor=" let regiones of region, let i = index"> 
+            <td> {{i + 1}} </td>
+            <td> <img [src]="regiones.flags.png"  style="width: 2rem;" alt=""></td>
+            <td> {{regiones.name.common}} </td>
+            <td> {{regiones.capital}} </td>
+            <td> {{regiones.population}} </td>
+        </tr>
+    </tbody>
+</table>
+
