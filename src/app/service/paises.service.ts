@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { Country } from '../interfaces/paises-interface';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { Regiones } from '../interfaces/regiones-interface';
 
 

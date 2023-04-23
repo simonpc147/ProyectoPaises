@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/proyect-paises",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

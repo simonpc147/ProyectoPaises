@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+/* *********************/
+/* seccion F O O T E R */
+/* *********************/
+
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0%;
+    /* white-space: pre; */
+    justify-content: space-evenly;
+}
+
+footer a {
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    margin: 5px;
+    font-size: 26px;
+}
+

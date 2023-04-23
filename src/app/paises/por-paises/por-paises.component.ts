@@ -12,9 +12,6 @@ export class PorPaisesComponent {
    hayError: boolean = false;
    paises: Country[] = [];
 
-   paisesSugeridos: Country[] = [];
-   mostrarSugerencias: boolean = false;
-
  constructor ( private service: PaisesService) {}
 
   buscar() {
@@ -22,7 +19,7 @@ export class PorPaisesComponent {
     this.service.buscarPais(this.termino)
     .subscribe( ( paises) => { 
       console.log(paises);
-       this.paises = paises;
+       this.paises = paises.splice(0,6);
 
     }, (error) => {
       this.hayError = true;
@@ -30,27 +27,10 @@ export class PorPaisesComponent {
     });
  }
 
-    sugerencias( termino: Event ) {
-
-      const element = termino.target as HTMLInputElement;
-      this.hayError = false;
-      this.termino = element.value;
-      this.mostrarSugerencias = true;
-
-      console.log(this.termino)
-    
-       this.service.buscarPais( this.termino )
-        .subscribe( 
-           paises => this.paisesSugeridos = paises.splice(0,5),
-           (err) => this.paisesSugeridos = []
-         );
-  
-    }
-
-    teclapresionada (event : any) {
-        const valor = event.target.value;
-        console.log(valor)
-      }
+    // teclapresionada (event : any) {
+    //     const valor = event.target.value;
+    //     console.log(valor)
+    //   }
 
 
 }

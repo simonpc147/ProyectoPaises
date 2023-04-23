@@ -1,38 +1,36 @@
 
-<style>
-  ul {
-    text-align: center;
-    font-size: larger;
-  }
-  a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-  }
-  h1 {
-    
-    text-align: center;
-    border: 5px solid;
-    width: 22rem;
-    margin: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-  }
-</style>
+  <div class="row container mt-4" >
+    <div  class="col-3">
 
+  <h1>Paises</h1>
+  <hr>
 
-<h1>Rutas de Saimon</h1>
-
-<div class="row container mt-4" >
-  
-  <div  class="col-3">
     <ul class="list-group">
-      <li class="list-group-item"><a routerLink="/pais"> Por Paises </a></li>
-      <li class="list-group-item"><a routerLink="/capital"> Por Capital </a></li>
-      <li class="list-group-item"><a routerLink="/region"> Por Region </a></li>
-      <!-- <li class="list-group-item"><a routerLink="/paises/:id"> Por Region </a></li> -->
+      <li class="list-group-item" 
+          routerLink="/pais" 
+          routerLinkActive="active"
+          style="text-align: center;"> 
+          Por Paises 
+      </li>
       
+      <li class="list-group-item" 
+          routerLink="/capital" 
+          routerLinkActive="active"
+          style="text-align: center;"> 
+          Por Capitales 
+      </li>
+      
+      <li class="list-group-item" 
+          routerLink="/region" 
+          routerLinkActive="active" 
+          style="text-align: center;">
+           Por Regiones 
+      </li>
     </ul>
   </div>
+
+  
+  <!-- [ngClass]="{'active': regionactiva === region}" -->
 
     <div class="col">
       <router-outlet></router-outlet>
@@ -40,3 +38,4 @@
 
   
 </div>
+

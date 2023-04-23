@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Subject, debounceTime } from 'rxjs';
 import { Country } from 'src/app/interfaces/paises-interface';
 import { PaisesService } from 'src/app/service/paises.service';
 
@@ -12,10 +13,13 @@ export class PorCapitalComponent {
   hayError: boolean = false;
   capitales : Country[] = [];
 
-  paisesSugeridos: Country[] = [];
-  mostrarSugerencias: boolean = false;
 
   constructor (private service: PaisesService) {}
+
+  // ngOnDestroy(): void {
+  //   console.log("destruido")
+    
+  
 
   buscar() {
     this.hayError = false;
@@ -24,7 +28,7 @@ export class PorCapitalComponent {
     this.service.buscarCapital(this.termino)
     .subscribe(capitales => {
       console.log(capitales);
-      this.capitales = capitales;
+      this.capitales = capitales.splice(0,6);
     }, 
     (error) =>{
       this.hayError  = true;
@@ -33,27 +37,10 @@ export class PorCapitalComponent {
     )
   }
 
-  sugerencias( termino: Event ) {
-
-    const element = termino.target as HTMLInputElement;
-    this.hayError = false;
-    this.termino = element.value;
-    this.mostrarSugerencias = true;
-
-    console.log(this.termino)
-  
-     this.service.buscarCapital( this.termino )
-      .subscribe( 
-         paises => this.paisesSugeridos = paises.splice(0,5),
-         (err) => this.paisesSugeridos = []
-       );
-
-  }
-
-  teclapresionada (event : any) {
-    const valor = event.target.value;
-    console.log(valor)
-  }
+  // teclapresionada (event : any) {
+  //   const valor = event.target.value;
+  //   console.log(valor)
+  // }
 
 
 }

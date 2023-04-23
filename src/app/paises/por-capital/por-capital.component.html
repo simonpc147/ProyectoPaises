@@ -1,53 +1,68 @@
-
-<style>
-    ul {
-        list-style: none;
-    }
-</style>
  
- <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
+<h1>Por Capital</h1>
+<hr>
+
+ <nav>
+    <div>
         <form (ngSubmit)="buscar()" class="d-flex">
             <input 
             type="text" 
             name="termino"
             autocomplete="off"
             placeholder="Buscar Capital..." 
-            class="form-control me-2"
+            class="form-control me-2 text-center"
             aria-label="Search"
-            (input)="sugerencias($event)"
+            (input)="buscar()"
             [(ngModel)]="termino"
             >
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
     </div>
   </nav>
 
 
- <ul>
-    <li *ngFor=" let paises of paisesSugeridos">
-        {{paises.capital}}
-    </li>
- </ul>
- 
- <div *ngIf="hayError" 
-      class="alerta">
- No se encontro el termino {{ termino }}
- </div>
+    <div *ngIf="termino === ''; else table" style="margin-top: 15px;" class="alert alert-warning text-center">
+        No hay capitales que mostrar
+      </div>
+            
+      <ng-template #table>
+        
+        <div *ngIf="hayError" 
+            class="alert alert-danger"
+            style="margin-top: 15px;">
+        No se encontro el termino {{ termino }}
+        </div>
 
+     
 
- <table>
-    <tbody>
-        <tr *ngFor="let Capital of capitales; let i = index">
-           
-            <td>{{ i + 1 }}</td>
-            <td><img [src]="Capital.coatOfArms.png" style="width: 40px;" alt=""></td>
-            <td> {{Capital.flag}} </td>
-            <td> {{Capital.capital}}, {{Capital.name.common}} </td>
-            <td> {{Capital.population}} </td>
-           
-            <td> <a [routerLink]="[ '/paises', Capital.cca2 ]"> ver mas...</a></td>
-           
-        </tr>
-    </tbody>
- </table>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Bandera</th>
+                  <th>Icon</th>
+                  <th>Nombre</th>
+                  <th>Capital</th>
+                  <th>Población</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+            <tbody>
+                <tr *ngFor="let Capital of capitales; let i = index">
+                
+                    <td>{{ i + 1 }}</td>
+                    <td><img [src]="Capital.coatOfArms.png" style="width: 40px;" alt=""></td>
+                    <td> {{Capital.flag}} </td>
+                    <td> {{Capital.name.common}} </td>
+                    <td> {{Capital.capital}} </td>
+                    <td> {{Capital.population | number }} </td>
+                
+                    <td> <a [routerLink]="[ '/paises', Capital.cca2 ]"> 
+                            <i class="bi bi-arrow-up-right-square" style="cursor: pointer; font-size: 1.5rem;" ></i>
+                        </a>
+                    </td>
+                
+                </tr>
+            </tbody>
+        </table>
+    </ng-template>

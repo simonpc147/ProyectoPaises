@@ -1,51 +1,81 @@
-<style>
-    ul {
-        list-style: none;
-    }
-</style>
 
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <form (ngSubmit)="buscar()" class="d-flex">
-                <input 
-                type="text" 
-                name="termino"
-                autocomplete="off"
-                placeholder="Buscar Pais..." 
-                class="form-control me-2"
-                aria-label="Search"
-                (input)="sugerencias($event)"
-                [(ngModel)]="termino"
-                >
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
+
+ <h1>Por País</h1>
+ <hr>
+
+    <nav >
+        <div class ="row">
+                <form (ngSubmit)="buscar()" class="d-flex">
+                    <input 
+                    type="text" 
+                    name="termino"
+                    autocomplete="off"
+                    placeholder="Buscar por Pais..." 
+                    class="form-control me-2 text-center"
+                    aria-label="Search"
+                    (input)="buscar()"
+                    [(ngModel)]="termino"
+                    >
+                </form>
         </div>
     </nav>
+   
 
- <ul>
-    <li *ngFor=" let paises of paisesSugeridos">
-        {{paises.name.common}}
-    </li>
- </ul>
+    <div *ngIf="termino === ''; else table" 
+         style="margin-top: 15px;" 
+         class="alert alert-warning text-center" >
+        No hay países que mostrar
+    </div>
 
- <div *ngIf="hayError" 
-      class="alerta">
- No se encontro el termino {{ termino }}
- </div>
+    
 
+    <ng-template #table>
 
- <table>
-    <tbody>
-        <tr *ngFor="let Pais of paises; let i = index">
-           
-            <td>{{ i + 1 }}</td>
-            <td><img [src]="Pais.flags.png" style="width: 40px;" alt=""></td>
-            <td> {{Pais.flag}} </td>
-            <td> {{Pais.name.common}} </td>
-            <td> {{Pais.population | number}} </td>
-           
-            <td> <a [routerLink]="[ '/paises', Pais.cca2 ]"> ver mas...</a></td>
-           
-        </tr>
-    </tbody>
- </table>
+    <div *ngIf="hayError" 
+         class="alert alert-danger"
+         style="margin-top: 15px;">
+    No se encontro el termino {{ termino }}
+    </div>
+
+        <table class="table table-hover">
+
+            <thead>
+                <tr>
+                <th>#</th>
+                <th>Bandera</th>
+                <th>Icon</th>
+                <th>Nombre</th>
+                <th>Capital</th>
+                <th>Población</th>
+                <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let Pais of paises; let i = index">
+                
+                    <td>{{ i + 1 }}</td>
+                    <td><img [src]="Pais.flags.png" style="width: 40px;" alt=""></td>
+                    <td> {{Pais.flag}} </td>
+                    <td> {{Pais.name.common}} </td>
+                    <td> {{Pais.capital}} </td>
+                    <td> {{Pais.population | number}} </td>
+                
+                    <td> <a [routerLink]="[ '/paises', Pais.cca2 ]"> 
+                        <i class="bi bi-arrow-up-right-square" style="cursor: pointer; font-size: 1.5rem;" ></i>
+                        </a>
+                    </td>
+                
+                </tr>
+            </tbody>
+        </table>
+
+    </ng-template>
+
+    
+
+  
+
+ 
+  
+
